@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EXPLAIN YOUR MOVE! · 2026 Dance Spirit in Suwon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue: #1266ed;
+  --lime: #6cd919;
+  --sky: #8ab3fb;
+  --bg: #1266ed;
+  --panel: #ffffff;
+  --panel-alt: #f7f7f2;
+  --ink: #000000;
+  --gray: #777777;
+  --border: 1.25px solid #000000;
+  --shadow: 4px 4px 0px #000000;
+  --shadow-lg: 8px 8px 0px #000000;
+}
+*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}
+body{
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+/* App Phone Frame */
+.app-frame{
+  width: 390px;
+  height: 820px;
+  max-height: 95vh;
+  background: var(--panel);
+  border: var(--border);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header{
+  background: var(--blue);
+  border-bottom: var(--border);
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 8px;
+  letter-spacing: 0.32px;
+  flex-shrink: 0;
+}
+.app-header button{
+  background: none;
+  border: none;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+}
+
+/* Common View Container */
+.view{display:none;flex-direction:column;width:100%;height:calc(100% - 38px);overflow-y:auto;}
+.view.active{display:flex}
+
+/* --- VIEW 1: LANDING --- */
+.hero-sec{
+  display: grid;
+  grid-template-columns: 43px 1fr 82px;
+  border-bottom: var(--border);
+  background: var(--panel-alt);
+  flex-shrink: 0;
+}
+.hero-col-left{
+  border-right: var(--border);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 8px;
+}
+.hero-col-mid{
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-col-mid .tag{
+  font-size: 8px;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: 0.32px;
+  margin-bottom: 4px;
+}
+.hero-col-mid h1{
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -2.4px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.hero-col-mid p{
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #222;
+}
+.hero-col-right{
+  background: var(--lime);
+  border-left: var(--border);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-weight: 900;
+}
+.hero-col-right .oct{font-size: 9px;}
+.hero-col-right .date-num{font-size: 35px; letter-spacing: -2.8px; line-height: 1;}
+.hero-col-right .sub{font-size: 8px; line-height: 1.1;}
+
+/* Mission Flow */
+.mission-flow-box{
+  background: var(--panel);
+  border-bottom: var(--border);
+  padding: 12px;
+  flex-shrink: 0;
+}
+.mf-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.mf-header h2{
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -0.68px;
+}
+.mf-header span{
+  font-size: 8px;
+  font-weight: 600;
+  text-align: right;
+}
+.mf-steps{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+.mf-step-card{
+  background: var(--panel);
+  border: var(--border);
+  padding: 6px 2px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+}
+.mf-step-card.active{ background: var(--sky); }
+.mf-step-card .step-no{ font-size: 8px; font-weight: 800; color: var(--blue); }
+.mf-step-card .step-title{ font-size: 7px; font-weight: 800; color: var(--ink); margin-top: 1px; }
+
+/* Zone List */
+.zone-select-bar{
+  background: #f4f4f4;
+  border-top: var(--border);
+  border-bottom: var(--border);
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.48px;
+  flex-shrink: 0;
+}
+.zones-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-shrink: 0;
+}
+.zone-btn{
+  background: var(--panel);
+  border-right: var(--border);
+  border-bottom: var(--border);
+  padding: 12px 10px;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-template-rows: auto auto auto;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+.zone-btn:nth-child(even){border-right: none;}
+.zone-btn.done{background: var(--lime);}
+.zone-btn .z-num{ grid-row: span 3; font-size: 9px; font-weight: 800; color: var(--blue); }
+.zone-btn .z-title{ font-size: 11px; font-weight: 900; color: var(--ink); }
+.zone-btn .z-ko{ font-size: 12px; font-weight: 800; color: #333; margin-top: 1px; }
+.zone-btn .z-arrow{ justify-self: end; font-weight: 800; font-size: 11px; }
+
+.tip-bar{
+  background: var(--sky);
+  border-top: var(--border);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+.tip-badge{
+  background: var(--panel);
+  border: var(--border);
+  padding: 2px 5px;
+  font-weight: 900;
+  font-size: 8px;
+}
+
+
+/* --- VIEW 2: PASSCODE --- */
+.passcode-hero{
+  display: grid;
+  grid-template-columns: 1fr 91px;
+  border-bottom: var(--border);
+  background: var(--panel-alt);
+}
+.passcode-left{ padding: 16px 12px; }
+.passcode-right{
+  background: var(--sky);
+  border-left: var(--border);
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-weight: 900;
+}
+.passcode-right .gate-num{ font-size: 40px; letter-spacing: -3.44px; line-height: 1; }
+.passcode-form-wrap{ padding: 12px; background: var(--panel); }
+.passcode-card{ background: var(--panel); border: var(--border); padding: 12px; }
+
+.pin-input-field{
+  width: 100%;
+  height: 54px;
+  background: #f4f4f4;
+  border: var(--border);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 10px;
+  font-family: inherit;
+  outline: none;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+.pin-input-field:focus{ background: #fff; border-color: var(--blue); }
+
+.action-btn{
+  background: var(--lime);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  width: 100%;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  margin-top: 10px;
+}
+
+
+/* --- VIEW 3: TRIVIA QUIZ --- */
+.quiz-top-sec{
+  display: grid;
+  grid-template-columns: 1fr 91px;
+  border-bottom: var(--border);
+  background: var(--panel-alt);
+}
+.quiz-steps-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-bottom: var(--border);
+  background: var(--panel);
+  gap: 10px;
+}
+.q-step-node{
+  width: 24px; height: 24px;
+  border-radius: 12px;
+  border: var(--border);
+  background: var(--panel);
+  display: grid; place-items: center;
+  font-size: 9px; font-weight: 900;
+}
+.q-step-node.active{ border-color: var(--blue); color: var(--blue); border-width: 1.5px; }
+.q-step-line{ flex: 1; height: 1.5px; background: var(--ink); }
+.quiz-body{ padding: 12px; background: var(--panel); }
+.choice-list{ display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.choice-card{
+  background: #f4f4f4;
+  border: var(--border);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  font-size: 10px;
+  text-align: left;
+  width: 100%;
+}
+.choice-card.selected{
+  background: var(--sky);
+  box-shadow: inset 4px 0 0 0 var(--blue);
+}
+.choice-badge{
+  width: 22px; height: 22px;
+  border-radius: 11px;
+  background: var(--panel);
+  border: var(--border);
+  display: grid; place-items: center;
+  font-size: 9px; font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* Result / Review Step '!' */
+.review-card{
+  background: #f4f4f4;
+  border: var(--border);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* --- VIEW 4: CHAT HINT --- */
+.chat-header-bar{
+  background: var(--panel);
+  border-bottom: var(--border);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.chat-avatar{
+  width: 38px; height: 38px;
+  border-radius: 19px;
+  background: var(--sky);
+  border: var(--border);
+  display: grid; place-items: center;
+  font-weight: 900; color: var(--blue);
+  position: relative;
+}
+.online-dot{
+  position: absolute; bottom: 0; right: 0;
+  width: 10px; height: 10px;
+  background: var(--lime);
+  border: var(--border);
+  border-radius: 5px;
+}
+.chat-scroll-area{
+  background: var(--panel-alt);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-date-sep{
+  display: flex; align-items: center; gap: 8px;
+  font-size: 8px; color: var(--gray); font-weight: 700; text-align: center;
+  margin: 4px 0;
+}
+.chat-date-sep hr{flex:1; border:0; border-top: 1px solid #d7d7d2;}
+
+.msg-row{ display: flex; gap: 8px; align-items: flex-start; opacity: 0; transform: translateY(10px); transition: all 0.3s ease-out; }
+.msg-row.visible{ opacity: 1; transform: translateY(0); }
+.msg-row.me{ justify-content: flex-end; }
+.msg-bubble{
+  background: var(--panel);
+  border: var(--border);
+  box-shadow: 2px 2px 0px #000;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 10px; font-weight: 600; line-height: 1.4;
+  max-width: 275px;
+}
+.msg-bubble.lime{ background: var(--lime); }
+.msg-bubble.sky{ background: var(--sky); }
+.msg-time{ font-size: 8px; color: var(--gray); margin-top: 2px; font-weight: 600; padding: 0 2px; }
+
+/* Mission Note Modal Overlay */
+.mission-note-overlay{
+  position: absolute;
+  bottom: 12px; left: 14px; right: 14px;
+  background: var(--panel);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  z-index: 50;
+  display: flex; flex-direction: column;
+}
+.mn-header{
+  background: var(--sky);
+  border-bottom: var(--border);
+  padding: 6px 10px;
+  display: flex; justify-content: space-between;
+  font-size: 8px; font-weight: 800;
+}
+.mn-body{ padding: 10px 12px; }
+.mn-body h4{ font-size: 13px; font-weight: 900; margin-bottom: 4px; }
+.mn-body p{ font-size: 9px; line-height: 1.35; font-weight: 600; }
+.mn-body p b{ font-weight: 900; }
+
+/* Timer Banner Pill */
+.timer-pill{
+  position: absolute;
+  top: 45px; left: 50%; transform: translateX(-50%);
+  background: var(--ink);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 8px; font-weight: 800;
+  z-index: 60;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+/* Choreography Illustration Step Card */
+.step-image-card{
+  background: #ffffff;
+  border: 1.25px solid #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 2px 2px 0px #000;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  user-select: none;
+}
+.step-image-card:active{
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000;
+}
+.step-image-wrapper{
+  position: relative;
+  width: 100%;
+  background: #f7f7f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.step-hint-img{
+  width: 100%;
+  height: auto;
+  max-height: 145px;
+  object-fit: contain;
+  display: block;
+}
+.step-image-zoom-badge{
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  font-size: 7.5px;
+  font-weight: 800;
+  padding: 3px 6px;
+  border-radius: 4px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  pointer-events: none;
+}
+.step-image-caption{
+  padding: 6px 8px;
+  background: #ffffff;
+  border-top: 1.25px solid #000;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: var(--blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Image Preview Modal (확대 모달) */
+.image-preview-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+.preview-dialog{
+  width: 100%;
+  max-width: 330px;
+  background: var(--panel);
+  border: var(--border);
+  box-shadow: var(--shadow-lg);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.preview-header{
+  background: var(--sky);
+  border-bottom: var(--border);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 900;
+}
+.preview-close-btn{
+  background: #fff;
+  border: 1.25px solid #000;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 1px 1px 0px #000;
+}
+.preview-close-btn:active{
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+.preview-img-box{
+  background: #f7f7f2;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px;
+  border-bottom: var(--border);
+}
+.preview-img-box img{
+  max-width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1.25px solid #000;
+  background: #ffffff;
+  box-shadow: 2px 2px 0px #000;
+}
+.preview-desc-box{
+  padding: 10px 12px;
+  background: var(--panel);
+}
+</style>
+</head>
+<body>
+
+<div class="app-frame" id="appFrame">
+  
+  <!-- APP HEADER (Global) -->
+  <div class="app-header" onclick="goToLanding()">
+    <button id="headerBackBtn" style="display:none">← DANCE ZONES</button>
+    <span id="headerTitleMain">EXPLAIN YOUR MOVE!</span>
+    <span id="headerSubMain"></span>
+  </div>
+
+  <!-- ================= VIEW 1: LANDING ================= -->
+  <div id="view-landing" class="view active">
+    <div class="hero-sec">
+      <div class="hero-col-left">
+        <span>DS / SW</span>
+        <span style="font-size:16px; font-weight:900;"></span>
+      </div>
+      <div class="hero-col-mid">
+        <div class="tag">YOUTH DANCE MISSION BOOTH</div>
+        <h1>EXPLAIN<br>YOUR MOVE!</h1>
+        <p>움직임을 읽고, 힌트를 연결하고, 정답을 완성하세요.</p>
+      </div>
+      <div class="hero-col-right">
+        <div class="oct">OCT</div>
+        <div class="date-num">17</div>
+        <div class="sub">DANCE SPIRIT<br>IN SUWON</div>
+      </div>
+    </div>
+
+    <div class="mission-flow-box">
+      <div class="mf-header">
+        <h2>MISSION FLOW</h2>
+        <span style="font-weight:600">아래 순서에 따라<br>댄스 미션을 완성하세요.</span>
+      </div>
+      <div class="mf-steps">
+        <div class="mf-step-card active">
+          <div class="step-no">01</div>
+          <div class="step-title">ZONE 코드 입력</div>
+        </div>
+        <div class="mf-step-card">
+          <div class="step-no">02</div>
+          <div class="step-title">댄스 장르별 퀴즈</div>
+        </div>
+        <div class="mf-step-card">
+          <div class="step-no">03</div>
+          <div class="step-title"> 미션 : K-pop 안무 추리</div>
+        </div>
+        <div class="mf-step-card">
+          <div class="step-no">04</div>
+          <div class="step-title">미션지 완성하기</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zone-select-bar">
+      <span>DANCE ZONES</span>
+      <span>SELECT A CATEGORY ↓</span>
+    </div>
+
+    <div class="zones-grid" id="zoneGrid"></div>
+
+    <div class="tip-bar">
+      <div class="tip-badge">TIP</div>
+      <div>각 존의 QR을 스캔하면 K-pop 안무를 추리할 수 있는 설명서가 도착합니다.</div>
+    </div>
+  </div>
+
+
+  <!-- ================= VIEW 2: PASSCODE ================= -->
+  <div id="view-passcode" class="view">
+    <div class="passcode-hero">
+      <div class="passcode-left">
+        <div style="font-size:8px; font-weight:800; color:var(--blue); margin-bottom:4px">PRIVATE MISSION ACCESS</div>
+        <h2 style="font-size:30px; font-weight:900; line-height:1.05; letter-spacing:-2px; margin-bottom:6px">ENTER<br>PASSCODE</h2>
+      </div>
+      <div class="passcode-right">
+        <div style="font-size:8px">GATE</div>
+        <div class="gate-num" id="passcodeGateNum">01</div>
+        <div style="font-size:8px">LOCKED</div>
+      </div>
+    </div>
+
+    <div class="passcode-form-wrap">
+      <div class="passcode-card">
+        <div style="display:flex; justify-content:space-between; font-size:8px; font-weight:800; color:var(--blue);">
+          <span>4-DIGIT PASSCODE</span>
+          <span>ENTER CODE</span>
+        </div>
+        <div style="font-size:11px; font-weight:900; margin-top:8px;">댄싱 ZONE 입장 코드</div>
+        
+        <input type="tel" id="visiblePinInput" class="pin-input-field" maxlength="4" placeholder="••••" autocomplete="off" oninput="handlePinInput(this)">
+        
+        <div id="pinErrorMsg" style="font-size:9px; font-weight:700; color:#e5384f; min-height:16px; margin-bottom:4px;"></div>
+
+        <button class="action-btn" onclick="verifyPasscode()">
+          <div style="text-align:left">
+            <div style="font-size:10px">코드 확인하고 입장하기</div>
+            <div style="font-size:8px; font-weight:700; color:#444; margin-top:2px;">VERIFY & ENTER ZONE</div>
+          </div>
+          <span style="font-size:16px">➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= VIEW 3: TRIVIA QUIZ ================= -->
+  <div id="view-quiz" class="view">
+    <div class="quiz-top-sec">
+      <div style="padding: 16px 12px;">
+        <div style="font-size:8px; font-weight:800; color:var(--blue); margin-bottom:4px">CHOREOGRAPHY ACCESS</div>
+        <h2 style="font-size:30px; font-weight:900; line-height:1.05; letter-spacing:-2px;">SOLVE TO<br>UNLOCK!</h2>
+      </div>
+      <div class="passcode-right" style="background:var(--lime);">
+        <div style="font-size:8px">LOCKED</div>
+        <div class="gate-num" id="quizGateNum">01</div>
+        <div style="font-size:8px">TRIVIA</div>
+      </div>
+    </div>
+
+    <div class="quiz-steps-row">
+      <div class="q-step-node" id="qNode1">1</div>
+      <div class="q-step-line"></div>
+      <div class="q-step-node" id="qNode2">2</div>
+      <div class="q-step-line"></div>
+      <div class="q-step-node" id="qNode3">3</div>
+      <div class="q-step-line"></div>
+      <div class="q-step-node" id="qNodeEx">!</div>
+    </div>
+
+    <div class="quiz-body" id="quizBodyContainer">
+      <!-- Injected either Question form or Review '!' form -->
+    </div>
+  </div>
+
+
+  <!-- ================= VIEW 4: CHAT HINT ================= -->
+  <div id="view-chat" class="view" style="position:relative;">
+    <div class="chat-header-bar">
+      <div class="chat-avatar">
+        <span id="chatAvatarInitial">W</span>
+        <div class="online-dot"></div>
+      </div>
+      <div>
+        <div style="font-size:8px; font-weight:800; color:var(--blue);" id="chatZoneTitle">ZONE 01: WAACKING · ONLINE</div>
+        <div style="font-size:14px; font-weight:900; letter-spacing:-0.4px;">CHOREOGRAPHY HINT 💬</div>
+      </div>
+      <div style="margin-left:auto; font-weight:900; font-size:16px;">•••</div>
+    </div>
+
+    <div class="chat-scroll-area" id="chatScrollArea">
+      <div class="chat-date-sep">
+        <hr><span id="chatDateStr">OCT 17 · 14:32</span><hr>
+      </div>
+
+      <!-- Steps container injected by sequential animation -->
+      <div id="chatStepsContainer" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </div>
+
+    <!-- Mission Note Modal -->
+    <div class="mission-note-overlay" id="missionNoteModal" style="display:none;">
+      <div class="mn-header">
+        <span>MISSION NOTE</span>
+        <span id="mnHeaderZone">01 / WAACKING</span>
+      </div>
+      <div class="mn-body">
+        <h4>📝 미션지 제출 안내</h4>
+        <p>이 안무가 어떤 노래인지 알겠다면?<br>종이 미션지의 <b id="mnTargetZoneName">[WAACKING]</b> 칸에 곡 제목을 적어주세요!</p>
+        <button class="action-btn" style="background:var(--lime); margin-top:8px; padding:10px;" onclick="closeMissionNote()">
+          <span style="font-size:9px; font-weight:900;">안내를 확인했어요</span>
+          <span>➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Image Preview Modal (확대 미리보기) -->
+    <div class="image-preview-overlay" id="imagePreviewModal" style="display:none;" onclick="closeImagePreview()">
+      <div class="preview-dialog" onclick="event.stopPropagation()">
+        <div class="preview-header">
+          <span id="previewModalTitle">CHOREOGRAPHY ILLUSTRATION</span>
+          <div class="preview-close-btn" onclick="closeImagePreview()">✕</div>
+        </div>
+        <div class="preview-img-box">
+          <img id="previewModalImg" src="" alt="Choreography Illustration">
+        </div>
+        <div class="preview-desc-box">
+          <div style="font-size:8px; font-weight:800; color:var(--blue); margin-bottom:2px;" id="previewModalStepNo">STEP 05</div>
+          <div style="font-size:11px; font-weight:900;" id="previewModalText">동작 설명 텍스트</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const zonesData = [
+  {
+    id: 'waacking', no: 1, name: 'WAACKING', ko: '왁킹', passcode: '0000',
+    illustration: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23f7f7f2"/><circle cx="150" cy="70" r="30" fill="%238ab3fb" stroke="%23000" stroke-width="2.5"/><path d="M150 100 L150 150 M130 120 L170 120 M130 180 L150 150 L170 180" stroke="%23000" stroke-width="2.5" fill="none"/><circle cx="110" cy="50" r="8" fill="%236cd919" stroke="%23000" stroke-width="2"/><circle cx="190" cy="50" r="8" fill="%236cd919" stroke="%23000" stroke-width="2"/><text x="150" y="193" font-size="12" font-weight="900" text-anchor="middle" font-family="sans-serif">WAACKING HINT ILLUSTRATION</text></svg>',
+    qs: [
+      { q: '왁킹의 시초가 되는 나라는 어디일까요?', o: ['대한민국', '미국 서부', '호주', '아프리카'], a: 1 },
+      { q: '왁킹의 기본동작 중 모델처럼 인상적인 포즈를 취하는 동작을 뜻하는 용어는?', o: ['트월 (Twirl)', '익스텐션 (Extension)', '포징 (Posing)', '스텝 (Step)'], a: 2 },
+      { q: '왁킹에서 주로 사용되는 음악 장르가 <u>아닌</u> 것은 무엇일까요?', o: ['발라드', '디스코 음악', '하우스 음악', '펑크 음악'], a: 0 }
+    ],
+    steps: [
+      '한 발을 앞으로 내밀고 팔 전체적인 모양을 W자로 만든다.',
+      '반대 발을 앞으로 내밀고 팔 한 쪽만 턱에 꽃받침을 한다.',
+      '1,2번 동작을 한 번 더 반복한다.',
+      '검지 손가락 하나를 들고 안 된다는 표시를 해준다.',
+      '양발을 트위스트 하며 동시에 손도 좌우로 움직인다.',
+      '5번 동작을 하며 옆으로 살짝 움직인다.',
+      '한 팔을 앞으로 쭉 뻗어 반원을 그려주고 손을 올려 브이를 한다.',
+      '두리번 거리는 손자세를 한다.',
+      '양 팔을 쭉 뻗었다가 주먹을 쥔 후, 허리에 가져간 뒤 당당하게 걷는다.'
+    ]
+  },
+  {
+    id: 'locking', no: 2, name: 'LOCKING', ko: '락킹', passcode: '0000',
+    illustration: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23f7f7f2"/><circle cx="150" cy="70" r="30" fill="%236cd919" stroke="%23000" stroke-width="2.5"/><path d="M150 100 L150 150 M120 110 L180 140 M130 180 L150 150 L170 180" stroke="%23000" stroke-width="2.5" fill="none"/><rect x="95" y="45" width="20" height="10" rx="3" fill="%238ab3fb" stroke="%23000" stroke-width="2"/><text x="150" y="193" font-size="12" font-weight="900" text-anchor="middle" font-family="sans-serif">LOCKING HINT ILLUSTRATION</text></svg>',
+    qs: [
+      { q: '자물쇠가 잠기듯(lock) 몸이 툭하고 멈추는 동작에서 유래한 춤은 무엇인가요?', o: ['룩킹(looking)', '락킹(locking)', '리킹(licking)', '라이킹(liking)'], a: 1 },
+      { q: '팔을 고정한 상태에서 손목을 축으로 삼아 부드럽게 원을 그리며 돌리는 락킹의 대표 동작은 무엇인가요?', o: ['락(lock)', '손목 회전(wrist roll)', '드롭(drop)', '킥(kick)'], a: 1 },
+      { q: '락킹 춤의 시각적, 표현적 특징 및 패션 스타일로 올바른 것은 무엇인가요?', o: ['엄숙하고 무표정한 얼굴로 정확한 각도만 유지하는 군무 스타일', '현대무용에 기반한 바닥 중심의 아크로바틱 안무', '화려하고 유머러스한 펑키룩(멜빵, 스트라이프 삭스 등)과 과장되고 익살스러운 표정', '어두운 조명 아래 감정을 절제하는 로봇 댄스 스타일'], a: 2 }
+    ],
+    steps: [
+      '오른 팔을 머리 위로 쭉 펴고, 왼팔은 허리에 둔다.',
+      '고개를 살짝 숙인 상태에서 오른 팔을 머리 위에 올린다.',
+      '다리를 어깨 넓이보다 좀 더 벌린다.',
+      '앞으로 아주 힘차게 콩콩 뛰며 나온다.'
+    ]
+  },
+  {
+    id: 'breaking', no: 3, name: 'BREAKING', ko: '브레이킹', passcode: '0000',
+    illustration: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23f7f7f2"/><circle cx="150" cy="80" r="28" fill="%238ab3fb" stroke="%23000" stroke-width="2.5"/><path d="M150 108 L150 150 M110 130 L190 130 M130 180 L150 150 L170 180" stroke="%23000" stroke-width="2.5" fill="none"/><polygon points="150,30 160,50 140,50" fill="%236cd919" stroke="%23000" stroke-width="2"/><text x="150" y="193" font-size="12" font-weight="900" text-anchor="middle" font-family="sans-serif">BREAKING HINT ILLUSTRATION</text></svg>',
+    qs: [
+      { q: '브레이킹에서 바닥에 손을 짚고 몸을 순식간에 딱 고정시켜 멈추는 멋진 시그니처 동작은 무엇인가요?', o: ['메이팅 (Mating)', '프리즈 (Freeze)', '쿨다운 (Cool-down)', '멜팅 (Melting)'], a: 1 },
+      { q: "브레이킹을 추는 남성 댄서를 '비보이(B-Boy)'라고 부릅니다. 그렇다면 여성 댄서를 부르는 올바른 명칭은 무엇인가요?", o: ['비걸 (B-Girl)', '비레이디 (B-Lady)', '비퀸 (B-Queen)', '비시스터 (B-Sister)'], a: 0 },
+      { q: '브레이킹 댄서가 등이나 어깨를 바닥에 대고 팽이처럼 빙글빙글 회전하는 고난도 파워무브 동작은 무엇인가요?', o: ['윈드밀 (Windmill)', '워터밀 (Watermill)', '트레드밀 (Treadmill)', '페이퍼밀 (Papermill)'], a: 0 }
+    ],
+    steps: [
+      '왼팔로 눈부신 햇빛을 가리듯 이마에 얹어주고 오른손은 아래로 뻗은 뒤 허리에서부터 머리 위로 슬며시 올린다',
+      '오른팔이 머리 위에 도달했을 때 고개를 숙이며 두 팔을 크게 돌려준다',
+      '왼손을 하늘 위로 쭉 뻗고 오른손으로 골반을 두드려준다',
+      '두팔을 양쪽으로 수타를 돌린다'
+    ]
+  },
+  {
+    id: 'popping', no: 4, name: 'POPPING', ko: '팝핑', passcode: '0000',
+    illustration: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23f7f7f2"/><circle cx="150" cy="70" r="30" fill="%236cd919" stroke="%23000" stroke-width="2.5"/><path d="M150 100 L150 150 M120 120 L180 120 M130 180 L150 150 L170 180" stroke="%23000" stroke-width="2.5" fill="none"/><path d="M90 60 Q110 40 130 60" stroke="%23000" stroke-width="2" fill="none"/><path d="M170 60 Q190 40 210 60" stroke="%23000" stroke-width="2" fill="none"/><text x="150" y="193" font-size="12" font-weight="900" text-anchor="middle" font-family="sans-serif">POPPING HINT ILLUSTRATION</text></svg>',
+    qs: [
+      { q: '팝핑의 가장 기본이 되는 기술로, 순간적으로 근육에 힘을 팝! 하고 주어 튕기는 동작을 무엇이라고 하나요?', o: ['톡 (Tok)', '팝 (Pop)', '킥 (Kick)', '샷 (Shot)'], a: 1 },
+      { q: "팝핑에서는 몸의 특정 부위(머리, 가슴, 골반 등)만 독립적으로 움직이는 기술을 사용합니다. 용어 그대로 몸의 부위를 분리하여 따로 사용하는 이 기본 기술의 명칭은 무엇인가요?", o: ['아이솔레이션 (Isolation)', '오버랩 (Overlap)', '워크아웃 (Walk Out)', '스윙 (Swing)'], a: 0 },
+      { q: "팝핑의 가장 기본적인 동작으로, 양쪽으로 무게중심을 이동하며 팔을 그네처럼 흔드는 이 동작의 이름은 창시자 부갈루 샘이 어릴 적 살았던 지역 이름에서 유래되었습니다. 이 동작의 이름은 무엇인가요?", o: ['프레즈노 (Fresno)', '시카고 (Chicago)', '브루클린 (Brooklyn)', '텍사스 (Texas)'], a: 0 }
+    ],
+    steps: [
+      '손을 세로로 세워 얼굴 앞에 놓는다.',
+      '손등이 보이게 손을 가로로 돌리기',
+      '가로로 돌린 손 뒤로 얼굴을 내밀고 귀엽게 빼꼼 쳐다보기',
+      '손가락 검지만을 들고 머리 위로 올려 골반을 2번 흔들기',
+      '손등으로 턱을 받쳐 고개를 좌우로 흔들기'
+    ]
+  }
+];
+
+let progress = JSON.parse(localStorage.getItem('dance_progress_v2') || '{}');
+let activeIndex = 0;
+let currentQuizQ = 0; // 0, 1, 2 for questions, 3 for '!' review step
+let userAnswers = [];
+let autoReturnTimer = null;
+
+function renderLanding() {
+  const grid = document.getElementById('zoneGrid');
+  grid.innerHTML = zonesData.map((z, idx) => {
+    const isDone = progress[z.id];
+    return `
+      <button class="zone-btn ${isDone ? 'done' : ''}" onclick="openPasscode(${idx})">
+        <div class="z-num">0${z.no}</div>
+        <div class="z-arrow">↗</div>
+        <div class="z-title">${z.name}</div>
+        <div class="z-ko">${z.ko}</div>
+      </button>
+    `;
+  }).join('');
+}
+
+function goToLanding() {
+  if (autoReturnTimer) clearInterval(autoReturnTimer);
+  showView('landing');
+  renderLanding();
+}
+
+function showView(viewId) {
+  if (autoReturnTimer && viewId !== 'chat') {
+    clearInterval(autoReturnTimer);
+    autoReturnTimer = null;
+  }
+  ['landing', 'passcode', 'quiz', 'chat'].forEach(v => {
+    document.getElementById('view-' + v).classList.remove('active');
+  });
+  document.getElementById('view-' + viewId).classList.add('active');
+  
+  const backBtn = document.getElementById('headerBackBtn');
+  if (viewId === 'landing') {
+    backBtn.style.display = 'none';
+    document.getElementById('headerTitleMain').textContent = 'EXPLAIN YOUR MOVE!';
+    document.getElementById('headerSubMain').textContent = '2026.10.17.Sat';
+  } else {
+    backBtn.style.display = 'inline-flex';
+    document.getElementById('headerTitleMain').textContent = `ZONE 0${zonesData[activeIndex].no}: ${zonesData[activeIndex].name}`;
+    document.getElementById('headerSubMain').textContent = '';
+  }
+}
+
+// 1. Passcode
+function openPasscode(idx) {
+  activeIndex = idx;
+  const z = zonesData[idx];
+  document.getElementById('passcodeGateNum').textContent = `0${z.no}`;
+  const pinInput = document.getElementById('visiblePinInput');
+  pinInput.value = '';
+  document.getElementById('pinErrorMsg').textContent = '';
+  showView('passcode');
+  setTimeout(() => pinInput.focus(), 100);
+}
+
+function handlePinInput(inputEl) {
+  const val = inputEl.value.replace(/[^0-9]/g, '').slice(0, 4);
+  inputEl.value = val;
+}
+
+function verifyPasscode() {
+  const z = zonesData[activeIndex];
+  const entered = document.getElementById('visiblePinInput').value;
+  const errDiv = document.getElementById('pinErrorMsg');
+
+  if (entered === z.passcode || entered === '0000') {
+    errDiv.style.color = '#12b76a';
+    errDiv.textContent = '✔ 패스코드 인증 성공! 퀴즈로 진입합니다.';
+    setTimeout(() => {
+      currentQuizQ = 0;
+      userAnswers = [undefined, undefined, undefined];
+      loadQuizScreen();
+    }, 400);
+  } else {
+    errDiv.style.color = '#e5384f';
+    errDiv.textContent = '❌ 비밀번호가 올바르지 않습니다. (입력 예: 0000)';
+  }
+}
+
+// 2. Quiz Screen (Questions 1-3 & Review '!')
+function loadQuizScreen() {
+  showView('quiz');
+  const z = zonesData[activeIndex];
+  
+  document.getElementById('quizGateNum').textContent = `0${z.no}`;
+
+  // Update step circles (1, 2, 3, !)
+  for(let i=1; i<=3; i++) {
+    const node = document.getElementById('qNode' + i);
+    if(node) node.classList.toggle('active', i === (currentQuizQ + 1));
+  }
+  const nodeEx = document.getElementById('qNodeEx');
+  if(nodeEx) nodeEx.classList.toggle('active', currentQuizQ === 3);
+
+  const bodyContainer = document.getElementById('quizBodyContainer');
+
+  if (currentQuizQ < 3) {
+    // Normal Question Step (0, 1, 2)
+    const q = z.qs[currentQuizQ];
+    bodyContainer.innerHTML = `
+      <div style="display:flex; justify-content:space-between; font-size:8px; font-weight:800; color:var(--blue); margin-bottom:6px;">
+        <span>QUESTION 0${currentQuizQ + 1}</span>
+        <span>SINGLE CHOICE</span>
+      </div>
+      <h3 style="font-size:15px; font-weight:900; line-height:1.3; margin-bottom:4px;">${q.q}</h3>
+      <p style="font-size:8px; color:var(--gray); font-weight:600; margin-bottom:10px;">한개의 정답을 선택해주세요.</p>
+
+      <div class="choice-list">
+        ${q.o.map((optText, oIdx) => {
+          const isSelected = userAnswers[currentQuizQ] === oIdx;
+          return `
+            <button class="choice-card ${isSelected ? 'selected' : ''}" onclick="selectChoice(${oIdx})">
+              <div class="choice-badge">${['A','B','C','D'][oIdx]}</div>
+              <div style="flex:1">${optText}</div>
+              <div style="width:13px; height:13px; border-radius:6.5px; border:1.25px solid #000; background:${isSelected ? 'var(--blue)' : '#fff'}"></div>
+            </button>
+          `;
+        }).join('')}
+      </div>
+
+      <div id="quizErrorMsg" style="font-size:9px; font-weight:700; color:#e5384f; min-height:16px; margin-top:6px;"></div>
+
+      <button class="action-btn" style="background:var(--lime); margin-top:8px;" onclick="nextQuizStep()">
+        <div style="text-align:left">
+          <div style="font-size:10px">${currentQuizQ === 2 ? '모든 답 확인하기 (!)' : '다음 문제로 이동하기'}</div>
+          <div style="font-size:8px; font-weight:700; color:#333; margin-top:2px;">SUBMIT ANSWER · QUESTION ${currentQuizQ + 1} OF 3</div>
+        </div>
+        <span style="font-size:16px">➔</span>
+      </button>
+    `;
+  } else {
+    // Review '!' Step
+    let allCorrect = true;
+    let reviewHtml = z.qs.map((q, idx) => {
+      const userChoice = userAnswers[idx];
+      const isCorrect = (userChoice === q.a);
+      if (!isCorrect) allCorrect = false;
+      const choiceLetter = userChoice !== undefined ? ['A','B','C','D'][userChoice] : '미선택';
+      const choiceText = userChoice !== undefined ? q.o[userChoice] : '답을 선택하지 않았습니다.';
+      const correctText = q.o[q.a];
+
+      return `
+        <div class="review-card" style="border-left: 4px solid ${isCorrect ? '#12b76a' : '#e5384f'}">
+          <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+            <b style="color:var(--blue)">Q0${idx+1}. ${q.q}</b>
+            <span style="color:${isCorrect ? '#12b76a' : '#e5384f'}; font-weight:900;">${isCorrect ? '✔ 정답' : '❌ 오답'}</span>
+          </div>
+          <div style="font-size:9px; color:#333;">내가 고른 답: <b>[${choiceLetter}] ${choiceText}</b></div>
+        </div>
+      `;
+    }).join('');
+
+    bodyContainer.innerHTML = `
+      <div style="font-size:8px; font-weight:800; color:var(--blue); margin-bottom:4px;">FINAL REVIEW & RESULTS</div>
+      <h3 style="font-size:16px; font-weight:900; margin-bottom:8px;">정답 판별 결과 📋</h3>
+      
+      <div style="max-height: 250px; overflow-y: auto; margin-bottom: 10px;">
+        ${reviewHtml}
+      </div>
+
+      <div style="font-size:10px; font-weight:800; text-align:center; padding:8px; background:${allCorrect ? '#e8f8f0' : '#fef2f2'}; border:1px solid ${allCorrect ? '#12b76a' : '#e5384f'}; margin-bottom:10px; color:${allCorrect ? '#12b76a' : '#e5384f'}">
+        ${allCorrect ? '🎉 3문제 모두 정답입니다! 안무 힌트가 열립니다.' : '⚠️ 오답이 포함되어 있습니다. 내용을 확인하고 다시 도전하세요!'}
+      </div>
+
+      ${allCorrect ? `
+        <button class="action-btn" style="background:var(--lime);" onclick="unlockAndOpenChat()">
+          <div style="text-align:left">
+            <div style="font-size:10px">안무 인스트럭션 채팅방 입장하기</div>
+            <div style="font-size:8px; font-weight:700; color:#333; margin-top:2px;">REVEAL CHOREOGRAPHY HINT</div>
+          </div>
+          <span style="font-size:16px">➔</span>
+        </button>
+      ` : `
+        <button class="action-btn" style="background:#e5384f; color:#fff;" onclick="restartQuiz()">
+          <div style="text-align:left">
+            <div style="font-size:10px">처음부터 다시 풀기</div>
+            <div style="font-size:8px; font-weight:700; color:#fff; opacity:0.8; margin-top:2px;">RETRY FROM QUESTION 1</div>
+          </div>
+          <span style="font-size:16px">↺</span>
+        </button>
+      `}
+    `;
+  }
+}
+
+function selectChoice(oIdx) {
+  userAnswers[currentQuizQ] = oIdx;
+  loadQuizScreen();
+}
+
+function nextQuizStep() {
+  const errDiv = document.getElementById('quizErrorMsg');
+  if (userAnswers[currentQuizQ] === undefined) {
+    errDiv.textContent = '보기 중 하나를 선택해주세요!';
+    return;
+  }
+  currentQuizQ++;
+  loadQuizScreen();
+}
+
+function restartQuiz() {
+  currentQuizQ = 0;
+  userAnswers = [undefined, undefined, undefined];
+  loadQuizScreen();
+}
+
+function unlockAndOpenChat() {
+  const z = zonesData[activeIndex];
+  progress[z.id] = true;
+  localStorage.setItem('dance_progress_v2', JSON.stringify(progress));
+  openChatHint();
+}
+
+// 3. Sequential Chat Hint (No 30s timer limit)
+function openChatHint() {
+  showView('chat');
+  const z = zonesData[activeIndex];
+  document.getElementById('chatZoneTitle').textContent = `ZONE 0${z.no}: ${z.name} · ONLINE`;
+  document.getElementById('chatAvatarInitial').textContent = z.name[0];
+  document.getElementById('mnHeaderZone').textContent = `0${z.no} / ${z.name}`;
+  document.getElementById('mnTargetZoneName').textContent = `[${z.name}]`;
+
+  const stepsContainer = document.getElementById('chatStepsContainer');
+  const chatArea = document.getElementById('chatScrollArea');
+  const missionNote = document.getElementById('missionNoteModal');
+  missionNote.style.display = 'none';
+  chatArea.style.paddingBottom = '';
+  
+  let chatItems = [
+    { type: 'bot', text: '안무 인스트럭션이 도착했어요!<br>순서대로 동작을 따라 해보세요. 💃', time: '14:32' }
+  ];
+  z.steps.forEach((st, i) => {
+    chatItems.push({ type: 'step', num: `0${i+1}`, text: st, time: `14:3${2 + Math.floor(i/2)}` });
+  });
+  chatItems.push({ type: 'me', text: '동작 연결 완료!<br>노래 제목이 떠오른 것 같아... 🎧', time: '14:34 · 읽음' });
+
+  stepsContainer.innerHTML = '';
+  
+  chatItems.forEach((item, index) => {
+    setTimeout(() => {
+      const row = document.createElement('div');
+      row.className = `msg-row ${item.type === 'me' ? 'me' : ''}`;
+      
+      if (item.type === 'bot') {
+        row.innerHTML = `
+          <div class="chat-avatar" style="width:28px; height:28px; font-size:10px;"><span>${z.name[0]}</span></div>
+          <div>
+            <div style="font-size:8px; font-weight:800; margin-bottom:2px;">DANCE GUIDE</div>
+            <div class="msg-bubble lime">${item.text}</div>
+            <div class="msg-time">${item.time}</div>
+          </div>
+        `;
+      } else if (item.type === 'step') {
+        const isLime = (parseInt(item.num) % 2 === 0);
+        
+        let extraHtml = '';
+
+        row.innerHTML = `
+          <div style="width:28px"></div>
+          <div style="flex:1; max-width:275px;">
+            <div class="msg-bubble ${isLime ? 'lime' : 'sky'}" style="max-width:100%; display:flex; align-items:flex-start; gap:8px;">
+              <div style="width:24px; height:24px; border-radius:12px; background:#fff; border:1.25px solid #000; display:grid; place-items:center; font-size:8px; font-weight:900; color:var(--blue); flex-shrink:0;">${item.num}</div>
+              <div style="font-size:10px; font-weight:700; flex:1;">${item.text}</div>
+            </div>
+            ${extraHtml}
+            <div class="msg-time">${item.time}</div>
+          </div>
+        `;
+      } else if (item.type === 'me') {
+        row.innerHTML = `
+          <div>
+            <div class="msg-bubble" style="background:#fff;">${item.text}</div>
+            <div class="msg-time" style="text-align:right;">${item.time}</div>
+          </div>
+        `;
+      }
+
+      stepsContainer.appendChild(row);
+      setTimeout(() => row.classList.add('visible'), 50);
+      
+      chatArea.scrollTop = chatArea.scrollHeight;
+
+      if (index === chatItems.length - 1) {
+        setTimeout(() => {
+          missionNote.style.display = 'flex';
+          chatArea.style.paddingBottom = `${missionNote.offsetHeight + 12}px`;
+          requestAnimationFrame(() => {
+            chatArea.scrollTop = chatArea.scrollHeight;
+          });
+        }, 500);
+      }
+    }, index * 600);
+  });
+}
+
+function closeMissionNote() {
+  document.getElementById('missionNoteModal').style.display = 'none';
+  document.getElementById('chatScrollArea').style.paddingBottom = '';
+}
+
+function openImagePreview(imgSrc, stepTitle, stepText) {
+  document.getElementById('previewModalImg').src = imgSrc;
+  document.getElementById('previewModalStepNo').textContent = stepTitle;
+  document.getElementById('previewModalText').textContent = stepText;
+  document.getElementById('imagePreviewModal').style.display = 'flex';
+}
+
+function closeImagePreview() {
+  document.getElementById('imagePreviewModal').style.display = 'none';
+}
+
+// Initial render
+renderLanding();
+</script>
+</body>
+</html>
